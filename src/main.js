@@ -10,7 +10,8 @@ import Store from '@/tools/storage'
 
 const app = createApp(App)
 app.use(ElementPlus)
-app.use(VueAxios, axios)
+// app.use(VueAxios, axios)
 app.use(Router)
 app.use(Store)
+app.config.globalProperties.$axios = axios
 app.mount('#app')
