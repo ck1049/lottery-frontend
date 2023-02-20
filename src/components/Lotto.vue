@@ -1,13 +1,13 @@
 <script setup>
+import { watch } from 'vue';
 import { onMounted, getCurrentInstance, ref, reactive } from 'vue';
 
 const currentInstance = getCurrentInstance();
 const $axios = currentInstance.appContext.config.globalProperties.$axios;
 const pageInfo = ref('');
+const currentPage = ref(1);
 
-onMounted(() => {
-    let api = "/api/lotto/index/1";
-    console.log($axios);
+const getLottoPageInfo = (api) => {
     $axios({
         method: 'get',
         url: api
@@ -17,22 +17,33 @@ onMounted(() => {
     }).catch(error => {
         console.log("error===" + error);
     })
+}
+onMounted(() => {
+    let api = "/api/lotto/index/1";
+    console.log($axios);
+    getLottoPageInfo(api);
 });
 
 // const tableRowClassName = params => console.log("params====" + JSON.stringify(params))
-const tableRowClassName = ({row,rowIndex}) => {
-  if (rowIndex % 5 == 0) {
-    return 'active-row'
-  } else  if (rowIndex % 5 == 1) {
-    return 'success-row'
-  } else  if (rowIndex % 5 == 2) {
-    return 'warning-row'
-  } else  if (rowIndex % 5 == 3) {
-    return 'danger-row'
-  } else {
-    return 'info-row'
-  }
+const tableRowClassName = ({ row, rowIndex }) => {
+    if (rowIndex % 5 == 0) {
+        return 'active-row'
+    } else if (rowIndex % 5 == 1) {
+        return 'success-row'
+    } else if (rowIndex % 5 == 2) {
+        return 'warning-row'
+    } else if (rowIndex % 5 == 3) {
+        return 'danger-row'
+    } else {
+        return 'info-row'
+    }
 }
+
+watch(currentPage, (newValue, oldValue) => {
+    let api = "/api/lotto/index/" + newValue;
+    getLottoPageInfo(api);
+});
+
 </script>
 <template>
     <div class="common-layout">
@@ -51,24 +62,31 @@ const tableRowClassName = ({row,rowIndex}) => {
                     <el-table-column prop="awardDate" label="开奖日期" width="180" />
                 </el-table>
             </el-main>
-            <el-footer>页码</el-footer>
+            <el-footer>
+                <el-pagination background layout="prev, pager, next" :total="pageInfo.total"
+                    v-model:current-page="currentPage" />
+            </el-footer>
         </el-container>
     </div>
 </template>
 <style scoped>
 .el-table .active-row {
-  --el-table-tr-bg-color: var(--el-color-active-light-9);
+    --el-table-tr-bg-color: var(--el-color-active-light-9);
 }
+
 .el-table .success-row {
-  --el-table-tr-bg-color: var(--el-color-success-light-9);
+    --el-table-tr-bg-color: var(--el-color-success-light-9);
 }
+
 .el-table .warning-row {
-  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+    --el-table-tr-bg-color: var(--el-color-warning-light-9);
 }
+
 .el-table .danger-row {
-  --el-table-tr-bg-color: var(--el-color-danger-light-9);
+    --el-table-tr-bg-color: var(--el-color-danger-light-9);
 }
+
 .el-table .info-row {
-  --el-table-tr-bg-color: var(--el-color-info-light-9);
+    --el-table-tr-bg-color: var(--el-color-info-light-9);
 }
 </style>
