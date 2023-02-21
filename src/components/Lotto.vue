@@ -28,7 +28,7 @@ onMounted(() => {
 // const tableRowClassName = params => console.log("params====" + JSON.stringify(params))
 const tableRowClassName = ({ row, rowIndex }) => {
     if (rowIndex % 5 == 0) {
-        return 'active-row'
+        return 'primary-row'
     } else if (rowIndex % 5 == 1) {
         return 'success-row'
     } else if (rowIndex % 5 == 2) {
@@ -70,9 +70,9 @@ watch(currentPage, (newValue, oldValue) => {
         </el-container>
     </div>
 </template>
-<style scoped>
-.el-table .active-row {
-    --el-table-tr-bg-color: var(--el-color-active-light-9);
+<style>
+.el-table .primary-row {
+    --el-table-tr-bg-color: var(--el-color-primary-light-9);
 }
 
 .el-table .success-row {
