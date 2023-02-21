@@ -26,7 +26,7 @@ const routes = [
     }
 ]
 const Router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHashHistory("/lottery-frontend"),
     routes: routes
 });
 export default Router;

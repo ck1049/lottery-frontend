@@ -18,6 +18,7 @@ const getLottoPageInfo = (api) => {
         console.log("error===" + error);
     })
 }
+
 onMounted(() => {
     let api = "/api/lotto/index/1";
     console.log($axios);
