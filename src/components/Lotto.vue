@@ -4,8 +4,11 @@ import { onMounted, getCurrentInstance, ref, reactive } from 'vue';
 
 const currentInstance = getCurrentInstance();
 const $axios = currentInstance.appContext.config.globalProperties.$axios;
+
+
 const pageInfo = ref('');
 const currentPage = ref(1);
+const pageSize = ref(20);
 
 const getLottoPageInfo = (api) => {
     $axios({
@@ -13,7 +16,7 @@ const getLottoPageInfo = (api) => {
         url: api
     }).then(response => {
         pageInfo.value = response.data;
-        console.log(pageInfo);
+        // console.log(pageInfo);
     }).catch(error => {
         console.log("error===" + error);
     })
@@ -21,7 +24,7 @@ const getLottoPageInfo = (api) => {
 
 onMounted(() => {
     let api = "/api/lotto/index/1";
-    console.log($axios);
+    // console.log($axios);
     getLottoPageInfo(api);
 });
 
@@ -41,7 +44,12 @@ const tableRowClassName = ({ row, rowIndex }) => {
 }
 
 watch(currentPage, (newValue, oldValue) => {
-    let api = "/api/lotto/index/" + newValue;
+    let api = "/api/lotto/index/" + newValue + "/" + pageSize.value;
+    getLottoPageInfo(api);
+});
+
+watch(pageSize, (newValue, oldValue) => {
+    let api = "/api/lotto/index/1/" + newValue ;
     getLottoPageInfo(api);
 });
 
@@ -51,21 +59,23 @@ watch(currentPage, (newValue, oldValue) => {
         <el-container>
             <el-header>体彩大乐透开奖信息</el-header>
             <el-main>
-                <el-table :data="pageInfo.list" style="width: 100%" :row-class-name="tableRowClassName">
-                    <el-table-column prop="issueNumber" label="期号" width="150" />
-                    <el-table-column prop="red1" label="红球" width="100" />
-                    <el-table-column prop="red2" label="红球" width="100" />
-                    <el-table-column prop="red3" label="红球" width="100" />
-                    <el-table-column prop="red4" label="红球" width="100" />
-                    <el-table-column prop="red5" label="红球" width="100" />
-                    <el-table-column prop="blue1" label="蓝球" width="100" />
-                    <el-table-column prop="blue2" label="蓝球" width="100" />
-                    <el-table-column prop="awardDate" label="开奖日期" width="180" />
+
+                <el-table :data="pageInfo.list" :row-class-name="tableRowClassName" table-layout="auto">
+                    <el-table-column :xs="5" prop="issueNumber" label="期号" />
+                    <el-table-column :xs="2" prop="red1" label="红球" />
+                    <el-table-column :xs="2" prop="red2" label="红球" />
+                    <el-table-column :xs="2" prop="red3" label="红球" />
+                    <el-table-column :xs="2" prop="red4" label="红球" />
+                    <el-table-column :xs="2" prop="red5" label="红球" />
+                    <el-table-column :xs="2" prop="blue1" label="蓝球" />
+                    <el-table-column :xs="2" prop="blue2" label="蓝球" />
+                    <el-table-column :xs="5" prop="awardDate" label="开奖日期" />
                 </el-table>
             </el-main>
             <el-footer>
-                <el-pagination background layout="prev, pager, next" :total="pageInfo.total"
-                    v-model:current-page="currentPage" />
+                <el-pagination background layout="prev, pager, next, sizes, jumper, ->, total" :total="pageInfo.total" :page-count-="pageInfo.pages"
+                    :page-sizes="[10, 20, 30, 50]" v-model:page-size="pageSize" v-model:current-page="currentPage"
+                    :pager-count="9" @size-change="handleSizeChange"/>
             </el-footer>
         </el-container>
     </div>

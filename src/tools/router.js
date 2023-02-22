@@ -26,7 +26,13 @@ const routes = [
     }
 ]
 const Router = createRouter({
-    history: createWebHashHistory("/lottery-frontend"),
+    history: createWebHashHistory(),
     routes: routes
+});
+Router.beforeEach((to, from, next) => {
+    if(to.path.indexOf("home") < 0) {
+        
+    }
+    next();
 });
 export default Router;

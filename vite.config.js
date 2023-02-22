@@ -5,13 +5,14 @@ import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  publicDir: "/lottery/",
+  // publicDir: "/lottery-frontend/",
   resolve: {
     alias: {
       '@':resolve('src')
     }
   },
   server: {
+    host: '0.0.0.0',
     proxy: {
       "/api": {
         target: "http://www.loafer.online/lottery",
