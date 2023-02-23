@@ -51,6 +51,7 @@ watch(currentPage, (newValue, oldValue) => {
 watch(pageSize, (newValue, oldValue) => {
     let api = "/api/lotto/index/1/" + newValue ;
     getLottoPageInfo(api);
+    currentPage.value = 1;
 });
 
 </script>
