@@ -22,13 +22,13 @@ const handleSizeChange = (size) => {
 }
 </script>
 <template>
-    <div class="common-layout">
+    <div class="common-layout" style="width: 90vw;height: 100vh;">
         <el-container>
             <el-header>
 
             </el-header>
-            <el-container>
-                <el-aside width="200px">
+            <el-container style="margin-top: 0;">
+                <el-aside>
                     <el-menu v-model:default-active="defaultActive" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :router="true">
                         <el-sub-menu index="1">
                             <template #title>
@@ -66,5 +66,20 @@ const handleSizeChange = (size) => {
     </div>
 </template>
   
-<style scoped></style>
+<style scoped>
+.el-header {
+    background-color: rgb(203, 237, 226);
+}
+.el-aside {
+    width: 10vw;
+}
+.el-main {
+    /* width: 80vw; */
+    padding: 0;
+}
+
+.el-container {
+    padding: 0;
+}
+</style>
   

@@ -5,100 +5,48 @@ import { onMounted, getCurrentInstance, ref, reactive } from 'vue';
 const currentInstance = getCurrentInstance();
 const $axios = currentInstance.appContext.config.globalProperties.$axios;
 
-
 const pageInfo = ref('');
 const currentPage = ref(1);
-const pageSize = ref(20);
+const pageSize = ref(10);
 
-const getLottoPageInfo = (api) => {
-    $axios({
-        method: 'get',
-        url: api
-    }).then(response => {
-        pageInfo.value = response.data;
-        // console.log(pageInfo);
-    }).catch(error => {
-        console.log("error===" + error);
-    })
-}
+const getLottoPageInfo = url => $axios.get(url).then(response => pageInfo.value = response).catch(error => console.log(`error===${error}`));
 
-onMounted(() => {
-    let api = "/api/lotto/index/1";
-    // console.log($axios);
-    getLottoPageInfo(api);
-});
+onMounted(() => getLottoPageInfo(`/lotto/index/1/${pageSize.value}`));
 
-// const tableRowClassName = params => console.log("params====" + JSON.stringify(params))
-const tableRowClassName = ({ row, rowIndex }) => {
-    if (rowIndex % 5 == 0) {
-        return 'primary-row'
-    } else if (rowIndex % 5 == 1) {
-        return 'success-row'
-    } else if (rowIndex % 5 == 2) {
-        return 'warning-row'
-    } else if (rowIndex % 5 == 3) {
-        return 'danger-row'
-    } else {
-        return 'info-row'
-    }
-}
+const rowStyleMap = { 0: "warning", 1: "success", 2: "warning", 3: "danger", 4: "info" };
 
-watch(currentPage, (newValue, oldValue) => {
-    let api = "/api/lotto/index/" + newValue + "/" + pageSize.value;
-    getLottoPageInfo(api);
-});
+const rowStyle = ({ row, rowIndex }) => ({ "--el-table-tr-bg-color": `var(--el-color-${rowStyleMap[rowIndex % 5]}-light-9)` });
 
-watch(pageSize, (newValue, oldValue) => {
-    let api = "/api/lotto/index/1/" + newValue ;
-    getLottoPageInfo(api);
-    currentPage.value = 1;
-});
+watch(currentPage, (newValue, oldValue) => getLottoPageInfo(`/lotto/index/${newValue}/${pageSize.value}`));
+
+watch(pageSize, (newValue, oldValue) => getLottoPageInfo(`/lotto/index/1/${newValue}`).then(currentPage.value = 1));
 
 </script>
 <template>
     <div class="common-layout">
         <el-container>
             <el-header>体彩大乐透开奖信息</el-header>
-            <el-main>
-
-                <el-table :data="pageInfo.list" :row-class-name="tableRowClassName" table-layout="auto">
-                    <el-table-column :xs="5" prop="issueNumber" label="期号" />
-                    <el-table-column :xs="2" prop="red1" label="红球" />
-                    <el-table-column :xs="2" prop="red2" label="红球" />
-                    <el-table-column :xs="2" prop="red3" label="红球" />
-                    <el-table-column :xs="2" prop="red4" label="红球" />
-                    <el-table-column :xs="2" prop="red5" label="红球" />
-                    <el-table-column :xs="2" prop="blue1" label="蓝球" />
-                    <el-table-column :xs="2" prop="blue2" label="蓝球" />
-                    <el-table-column :xs="5" prop="awardDate" label="开奖日期" />
+            <el-main style="padding: 0;">
+                <el-table :data="pageInfo.list" :row-class-name="tableRowClassName" table-layout="auto"
+                    :row-style="rowStyle">
+                    <el-table-column :xs="5" :sm="5" :md="5" :lg="5" prop="issueNumber" label="期号" />
+                    <el-table-column :xs="2" :sm="2" :md="2" :lg="2" prop="red1" label="红球" />
+                    <el-table-column :xs="2" :sm="2" :md="2" :lg="2" prop="red2" label="红球" />
+                    <el-table-column :xs="2" :sm="2" :md="2" :lg="2" prop="red3" label="红球" />
+                    <el-table-column :xs="2" :sm="2" :md="2" :lg="2" prop="red4" label="红球" />
+                    <el-table-column :xs="2" :sm="2" :md="2" :lg="2" prop="red5" label="红球" />
+                    <el-table-column :xs="2" :sm="2" :md="2" :lg="2" prop="blue1" label="蓝球" />
+                    <el-table-column :xs="2" :sm="2" :md="2" :lg="2" prop="blue2" label="蓝球" />
+                    <el-table-column :xs="5" :sm="5" :md="5" :lg="5" prop="awardDate" label="开奖日期" />
                 </el-table>
             </el-main>
-            <el-footer>
-                <el-pagination background layout="prev, pager, next, sizes, jumper, ->, total" :total="pageInfo.total" :page-count-="pageInfo.pages"
-                    :page-sizes="[10, 20, 30, 50]" v-model:page-size="pageSize" v-model:current-page="currentPage"
-                    :pager-count="9" @size-change="handleSizeChange"/>
+            <el-footer style="padding: 0;margin-top: 3px;">
+                <el-pagination background layout="prev, pager, next, sizes, jumper, ->, total" :total="pageInfo.total"
+                    :page-count-="pageInfo.pages" :page-sizes="[10, 20, 30, 50]" v-model:page-size="pageSize"
+                    v-model:current-page="currentPage" :pager-count="9" @size-change="handleSizeChange" />
             </el-footer>
         </el-container>
     </div>
 </template>
-<style>
-.el-table .primary-row {
-    --el-table-tr-bg-color: var(--el-color-primary-light-9);
-}
-
-.el-table .success-row {
-    --el-table-tr-bg-color: var(--el-color-success-light-9);
-}
-
-.el-table .warning-row {
-    --el-table-tr-bg-color: var(--el-color-warning-light-9);
-}
-
-.el-table .danger-row {
-    --el-table-tr-bg-color: var(--el-color-danger-light-9);
-}
-
-.el-table .info-row {
-    --el-table-tr-bg-color: var(--el-color-info-light-9);
-}
+<style scoped>
 </style>
