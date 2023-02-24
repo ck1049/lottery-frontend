@@ -1,31 +1,26 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import HelloWorld from '@/components/HelloWorld.vue'
-import Home from '@/components/Home.vue'
-import Lotto from '@/components/Lotto.vue'
-import TwoColorBall from '@/components/TwoColorBall.vue'
-
 const impComp = value => import(`@/components/${value}.vue`);
 const routes = [
     {
         name: "HelloWorld",
         path: "/HelloWorld",
-        component: HelloWorld
+        component: () => import('@/components/HelloWorld.vue')
     },
     {
         name: "Home",
         path: "/home",
-        component: Home
+        component: () => import('@/components/Home.vue')
     },
     {
         name: "Lotto",
         path: "/lotto/:index(\\d*)",
-        component: Lotto
+        component: () => import('@/components/Lotto.vue')
     },
     {
         name: "TwoColorBall",
         path: "/twoColorBall/:index(\\d*)",
-        component: TwoColorBall
+        component: () => import('@/components/TwoColorBall.vue')
     }
 ]
 const Router = createRouter({
