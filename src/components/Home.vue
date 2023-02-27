@@ -23,13 +23,13 @@ const handleSizeChange = (size) => {
 </script>
 <template>
     <div class="common-layout" style="width: 90vw;height: 100vh;">
-        <el-container>
+        <el-container style="height: 100%;">
             <el-header>
 
             </el-header>
-            <el-container style="margin-top: 0;">
-                <el-aside>
-                    <el-menu v-model:default-active="defaultActive" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :router="true">
+            <el-container style="margin-top: 0;height: 100%;">
+                <el-aside style="height: 100%;">
+                    <el-menu style="height: 100%;" v-model:default-active="defaultActive" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :router="true">
                         <el-sub-menu index="1">
                             <template #title>
                                 <!-- <el-icon>
@@ -38,7 +38,7 @@ const handleSizeChange = (size) => {
                                 <span>体彩大乐透</span>
                             </template>
                             <el-menu-item index="/lotto/1">开奖信息</el-menu-item>
-                            <el-menu-item index="1-2">实用工具</el-menu-item>
+                            <el-menu-item index="/lottoUtils">实用工具</el-menu-item>
                         </el-sub-menu>
                         <el-sub-menu index="2">
                             <template #title>

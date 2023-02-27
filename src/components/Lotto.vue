@@ -23,7 +23,7 @@ watch(pageSize, (newValue, oldValue) => getLottoPageInfo(`/lotto/index/1/${newVa
 
 </script>
 <template>
-    <div class="common-layout">
+    <div class="common-layout" style="padding-left: 1vw;">
         <el-container>
             <el-header>体彩大乐透开奖信息</el-header>
             <el-main style="padding: 0;">

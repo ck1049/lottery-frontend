@@ -21,6 +21,11 @@ const routes = [
         name: "TwoColorBall",
         path: "/twoColorBall/:index(\\d*)",
         component: () => import('@/components/TwoColorBall.vue')
+    },
+    {
+        name: "LottoUtils",
+        path: "/lottoUtils",
+        component: () => import('@/components/LottoUtils.vue')
     }
 ]
 const Router = createRouter({
