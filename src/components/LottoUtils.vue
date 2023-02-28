@@ -315,8 +315,8 @@ watch(selfNumberAdditional, (newValue, oldValue) => {
     background-color: var(--el-color-primary);
     border-radius: 50%;
     color: white;
-    width: 34px;
-    height: 34px;
+    width: 35px;
+    height: 33px;
     padding: 9px 8px;
 }
 </style>
