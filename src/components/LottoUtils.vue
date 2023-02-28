@@ -302,7 +302,7 @@ watch(selfNumberAdditional, (newValue, oldValue) => {
     </div>
 </template>
 <style scoped>
-/deep/ .el-checkbox-button.red-ball .el-checkbox-button__inner {
+::v-deep .el-checkbox-button.red-ball .el-checkbox-button__inner {
     background-color: var(--el-color-danger);
     border-radius: 50%;
     color: white;
@@ -311,7 +311,7 @@ watch(selfNumberAdditional, (newValue, oldValue) => {
     padding: 9px 8px;
 }
 
-/deep/ .el-checkbox-button.blue-ball .el-checkbox-button__inner {
+::v-deep .el-checkbox-button.blue-ball .el-checkbox-button__inner {
     background-color: var(--el-color-primary);
     border-radius: 50%;
     color: white;
