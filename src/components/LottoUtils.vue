@@ -199,7 +199,7 @@ watch(selfNumberAdditional, (newValue, oldValue) => {
                         <span style="margin-right: 2vw;vertical-align: auto;margin-top: 4px;">需花费:{{
                             multipleRandomNumberCost }}元</span>
                         <span style="margin-top: 4px;">中奖率:{{ multipleRandomNumberWiningRate.fraction }}≈{{
-                            singleRandomNumberWiningRate.rate
+                            multipleRandomNumberWiningRate.rate
                         }}</span>
                     </el-col>
                 </el-row>
@@ -269,33 +269,33 @@ watch(selfNumberAdditional, (newValue, oldValue) => {
                 </el-row>
                 <!-- button -->
                 <!-- <div>
-                                                            <el-row style="text-align: left;margin-bottom: 2vh;padding-left: 1vw;">
-                                                                <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                                                                    <el-button type="danger" circle v-for="(item, index) in allBalls.redBalls.slice(0, 12)"
-                                                                        :key="index">{{ item }}</el-button>
-                                                                </el-col>
-                                                            </el-row>
-                                                            <el-row style="text-align: left;margin-bottom: 2vh;padding-left: 1vw;">
-                                                                <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                                                                    <el-button type="danger" circle v-for="(item, index) in allBalls.redBalls.slice(12, 24)"
-                                                                        :key="index">{{ item }}</el-button>
-                                                                </el-col>
-                                                            </el-row>
-                                                            <el-row style="text-align: left;margin-bottom: 2vh;padding-left: 1vw;">
-                                                                <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                                                                    <el-button type="danger" circle v-for="(item, index) in allBalls.redBalls.slice(24)"
-                                                                        :key="index">{{
-                                                                            item }}</el-button>
-                                                                </el-col>
-                                                            </el-row>
-                                                            <el-row style="text-align: left;margin-bottom: 5vh;padding-left: 1vw;">
-                                                                <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                                                                    <el-button type="primary" circle v-for="(item, index) in allBalls.blueBalls" :key="index">{{
-                                                                        item
-                                                                    }}</el-button>
-                                                                </el-col>
-                                                            </el-row>
-                                                        </div> -->
+                                                                <el-row style="text-align: left;margin-bottom: 2vh;padding-left: 1vw;">
+                                                                    <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                                                                        <el-button type="danger" circle v-for="(item, index) in allBalls.redBalls.slice(0, 12)"
+                                                                            :key="index">{{ item }}</el-button>
+                                                                    </el-col>
+                                                                </el-row>
+                                                                <el-row style="text-align: left;margin-bottom: 2vh;padding-left: 1vw;">
+                                                                    <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                                                                        <el-button type="danger" circle v-for="(item, index) in allBalls.redBalls.slice(12, 24)"
+                                                                            :key="index">{{ item }}</el-button>
+                                                                    </el-col>
+                                                                </el-row>
+                                                                <el-row style="text-align: left;margin-bottom: 2vh;padding-left: 1vw;">
+                                                                    <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                                                                        <el-button type="danger" circle v-for="(item, index) in allBalls.redBalls.slice(24)"
+                                                                            :key="index">{{
+                                                                                item }}</el-button>
+                                                                    </el-col>
+                                                                </el-row>
+                                                                <el-row style="text-align: left;margin-bottom: 5vh;padding-left: 1vw;">
+                                                                    <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                                                                        <el-button type="primary" circle v-for="(item, index) in allBalls.blueBalls" :key="index">{{
+                                                                            item
+                                                                        }}</el-button>
+                                                                    </el-col>
+                                                                </el-row>
+                                                            </div> -->
             </el-main>
             <el-footer style="padding: 0; margin-top: 3px"> </el-footer>
         </el-container>
