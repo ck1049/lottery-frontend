@@ -1,10 +1,10 @@
 import axios from 'axios'
 import Qs from 'qs'//（如果只是get请求就不需要引qs）//序列化插件
 import _ from 'lodash'//这里时用的防抖函数
-const baseURLMap = {'development': 'http://localhost:5173/api/', 'production': 'http://www.loafer.online/api/'};
+const baseURLMap = {'development': 'http://localhost:5173/lottery/', 'production': 'https://www.loafer.online/lottery/'};
 axios.defaults.withCredentials = true;  //false
 // axios.defaults.baseURL = baseURLMap[process.env.NODE_ENV];
-axios.defaults.baseURL = "/api/";
+axios.defaults.baseURL = "/lottery/";
 
 const http = (path, params = {}, method = "GET", headerType = "json") => {
     let data = {};//baseURL = ""

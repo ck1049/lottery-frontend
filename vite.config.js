@@ -14,10 +14,10 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     proxy: {
-      "/api": {
+      "/lottery": {
         target: "http://www.loafer.online/lottery",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, "")
+        rewrite: (path) => path.replace(/^\/lottery/, "")
       }
     }
   }
